@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Gemellus — a Roman-themed open-source AI accent and pronunciation coach for advanced English learners." />
+  <title>Gemellus · From Peregrinus to Prosody</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="top-rule"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Gemellus home">
+      <span class="brand-mark">G</span>
+      <span><b>GEMELLUS</b><small>ARS PHONETICA</small></span>
+    </a>
+    <nav>
+      <a href="#mission">Mission</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#resources">Armory</a>
+      <a href="#roadmap">Cursus Honorum</a>
+      <a href="#history">The Name</a>
+    </nav>
+    <a class="button tiny" href="https://github.com/AliNikkhah2001/Gemellus">GitHub ↗</a>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy">
+        <div class="eyebrow">OPEN-SOURCE · SPEECH AI · PHONETICS · SLIGHTLY TOO MUCH ROME</div>
+        <h1>From <em>peregrinus</em><br>to <span>prosody.</span></h1>
+        <p class="lede">Gemellus is an AI accent coach for advanced English learners: listen to speech, align it at the phoneme level, measure what differs from a chosen target accent, explain the evidence, and prescribe focused practice.</p>
+        <div class="hero-actions">
+          <a class="button" href="#architecture">Inspect the Legion</a>
+          <a class="button ghost" href="#resources">Open the Armory</a>
+        </div>
+        <div class="edict">“The Roman theme is for morale. The phonetics must remain scientific.”</div>
+      </div>
+      <div class="hero-emblem" aria-hidden="true">
+        <svg viewBox="0 0 420 420" role="img">
+          <defs>
+            <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e1b966"/><stop offset="1" stop-color="#7e5325"/></linearGradient>
+          </defs>
+          <circle cx="210" cy="210" r="168" fill="none" stroke="url(#bronze)" stroke-width="2"/>
+          <circle cx="210" cy="210" r="145" fill="none" stroke="#5f3f25" stroke-width="1" stroke-dasharray="3 8"/>
+          <path d="M116 245c35 4 66-22 78-64-48 10-79 31-78 64Zm188 0c-35 4-66-22-78-64 48 10 79 31 78 64Z" fill="none" stroke="#a7793c" stroke-width="5"/>
+          <path d="M131 248c19 51 58 77 79 83m79-83c-19 51-58 77-79 83" fill="none" stroke="#a7793c" stroke-width="5"/>
+          <text x="210" y="177" text-anchor="middle" font-family="Cinzel" font-size="25" fill="#d1aa64">COHORS I</text>
+          <text x="210" y="227" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="48" fill="#f0dfbd">G</text>
+          <text x="210" y="265" text-anchor="middle" font-family="Cinzel" font-size="17" fill="#b99a67">NON SCORE · SED CAUSA</text>
+        </svg>
+      </div>
+    </section>
+
+    <section id="mission" class="section-shell split-section">
+      <div>
+        <div class="section-kicker">I · MISSION</div>
+        <h2>Not another mysterious <span>83%</span>.</h2>
+        <p>Most pronunciation tools collapse a complex signal into a scalar. Gemellus aims for transparent diagnosis: <strong>what happened, where, why it differs from your chosen target, how certain the system is, and what to practice next.</strong></p>
+        <div class="principles">
+          <article><b>Mensura ante iudicium</b><span>Measure before judging. The LLM explains measured evidence; it does not invent phonetics.</span></article>
+          <article><b>Accent ≠ intelligibility</b><span>A legitimate accent is not an error. Target-accent deviation and communication problems are separate axes.</span></article>
+          <article><b>Pronunciation ≠ language choice</b><span>Segmentals, prosody, collocation, and grammar should remain separable so progress is interpretable.</span></article>
+        </div>
+      </div>
+      <div class="diagnostic-card">
+        <div class="tablet-head"><span>ACTA GEMELLI</span><small>sample diagnostic</small></div>
+        <div class="metric"><span>Target</span><strong>/ɪ/ in “live”</strong></div>
+        <div class="metric"><span>Observed</span><strong>drifting toward /iː/</strong></div>
+        <div class="metric"><span>Evidence</span><strong>F1/F2 + phone posterior</strong></div>
+        <div class="metric"><span>Priority</span><strong class="bad">HIGH · HOSTIS DETECTED</strong></div>
+        <div class="tablet-note">Prescription: <b>live/leave · ship/sheep</b>, then shadow at 0.85× → 1.0× → 1.1×.</div>
+      </div>
+    </section>
+
+    <section id="architecture" class="architecture section-shell">
+      <div class="section-kicker">II · HIGH-LEVEL ARCHITECTURE</div>
+      <h2>The speech-analysis <span>legion.</span></h2>
+      <p class="section-intro">A compositional stack lets each subsystem do one job well, and keeps the explanation layer auditable.</p>
+
+      <div class="arch-grid">
+        <button class="arch-node" data-detail="Capture raw microphone/file audio. Preserve the raw signal: aggressive enhancement can distort formants and other fine acoustic evidence."><i>01</i><b>Audio Capture</b><small>raw WAV · calibration</small></button>
+        <div class="arrow">→</div>
+        <button class="arch-node" data-detail="Trim non-speech and optionally reduce noise. Silero VAD is the default candidate; enhancement should be conservative and optional."><i>02</i><b>Preprocess</b><small>Silero VAD · optional denoise</small></button>
+        <div class="arrow">→</div>
+        <button class="arch-node" data-detail="Transcribe spontaneous speech with Whisper/faster-whisper. For read-aloud exercises, the prompt text remains the canonical text."><i>03</i><b>ASR</b><small>Whisper · faster-whisper</small></button>
+        <div class="arrow">→</div>
+        <button class="arch-node" data-detail="Generate canonical phonemes and align words/phones to exact time spans. Candidates: MFA, Charsiu, CMUdict, Phonemizer."><i>04</i><b>Alignment</b><small>MFA · Charsiu · G2P</small></button>
+        <button class="arch-node gold" data-detail="Estimate phone-level pronunciation quality and substitutions. Candidates: Kaldi GOP, GOPT, Wav2Vec2 phoneme recognition."><i>05</i><b>Pronunciation</b><small>GOP · GOPT · phone posteriors</small></button>
+        <div class="arrow">+</div>
+        <button class="arch-node gold" data-detail="Extract interpretable phonetic features: F0, F1/F2/F3, intensity, durations, timing, rhythm, pauses and eventually VOT/linking features."><i>06</i><b>Acoustics</b><small>Praat · Parselmouth</small></button>
+        <div class="arrow">→</div>
+        <button class="arch-node gold" data-detail="Compare the learner against distributions or references for an explicitly chosen accent. Do not confuse personal voice characteristics with accent deviations."><i>07</i><b>Target Compare</b><small>GA · SSBE · reference corpus</small></button>
+        <div class="arrow">→</div>
+        <button class="arch-node red" data-detail="The coaching model receives structured evidence, prioritizes recurring issues, explains articulation, and generates minimal-pair, shadowing and connected-speech drills."><i>08</i><b>Coach</b><small>LLM · drills · progress model</small></button>
+      </div>
+      <div id="arch-detail" class="arch-detail">Select a legionary module to inspect its orders.</div>
+    </section>
+
+    <section class="section-shell measurements">
+      <div class="section-kicker">III · WHAT WE WANT TO MEASURE</div>
+      <h2>From vowels to <span>victory.</span></h2>
+      <div class="measure-grid">
+        <article><b>Segmentals</b><p>Substitutions · insertions · deletions · consonant identity · vowel quality.</p></article>
+        <article><b>Vowel space</b><p>F1/F2/F3 distributions, normalization, duration and phonetic context.</p></article>
+        <article><b>Prosody</b><p>F0 contour · pitch range · stress placement · intensity · phrase boundaries.</p></article>
+        <article><b>Temporal fluency</b><p>Speech rate · articulation rate · pause count/location · syllable and phone duration.</p></article>
+        <article><b>Connected speech</b><p>Weak forms · schwa reduction · linking · tapping · aspiration/VOT · coarticulation where reliable.</p></article>
+        <article><b>Lexical naturalness</b><p>A separate transcript-based subsystem for collocations, word choice and discourse—not part of the pronunciation score.</p></article>
+      </div>
+    </section>
+
+    <section id="resources" class="section-shell resources">
+      <div class="section-kicker">IV · ARMAMENTARIUM · OPEN-SOURCE ARMORY</div>
+      <div class="resource-heading">
+        <div><h2>Models, code & <span>datasets.</span></h2><p class="section-intro">The practical stack discovered during research, organized by role.</p></div>
+        <input id="resource-search" type="search" placeholder="Search the armory…" aria-label="Search resources" />
+      </div>
+      <div id="resource-grid" class="resource-grid">
+        <a class="resource-card" data-tags="scoring pronunciation gop model" href="https://github.com/YuanGongND/gopt"><span>Pronunciation</span><b>GOPT</b><p>Transformer-based multi-granularity pronunciation assessment using GOP features.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="scoring pronunciation kaldi gop" href="https://github.com/kaldi-asr/kaldi/tree/master/egs/gop_speechocean762"><span>Pronunciation</span><b>Kaldi GOP</b><p>Classical goodness-of-pronunciation recipe and interpretable phone-posterior baseline.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="alignment forced aligner mfa" href="https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner"><span>Alignment</span><b>Montreal Forced Aligner</b><p>Mature word/phone alignment with dictionaries and acoustic models.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="alignment phoneme wav2vec2 charsiu" href="https://github.com/lingjzhu/charsiu"><span>Alignment</span><b>Charsiu</b><p>Wav2Vec2-based phone recognition, forced alignment and text-independent segmentation.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="feedback alm audio llm l2 arctic" href="https://github.com/zoeyada/ALMs4Learning"><span>Feedback research</span><b>ALMs4Learning</b><p>Mispronunciation diagnosis and explanatory feedback; includes L2-Arctic-plus workflows.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="acoustic praat formant prosody python" href="https://github.com/YannickJadoul/Parselmouth"><span>Acoustics</span><b>Parselmouth / Praat</b><p>Python access to Praat algorithms for pitch, formants, intensity and duration.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="asr whisper local transcription" href="https://github.com/SYSTRAN/faster-whisper"><span>ASR</span><b>faster-whisper</b><p>Efficient Whisper inference for local or server-side transcription.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="vad speech silero" href="https://github.com/snakers4/silero-vad"><span>Preprocess</span><b>Silero VAD</b><p>Fast speech activity detection suitable for local pipelines.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="denoise enhancement deepfilternet" href="https://github.com/Rikorose/DeepFilterNet"><span>Preprocess</span><b>DeepFilterNet</b><p>Optional neural speech enhancement; preserve raw audio for phonetic measurement.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="phoneme g2p ipa phonemizer" href="https://github.com/bootphon/phonemizer"><span>Phonemes</span><b>Phonemizer</b><p>Text-to-phoneme tooling with IPA-capable backends such as eSpeak NG.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="features prosody opensmile" href="https://github.com/audeering/opensmile"><span>Acoustics</span><b>openSMILE</b><p>Large standardized acoustic feature sets. Research/personal licensing must be checked for intended use.</p><small>GitHub ↗</small></a>
+        <a class="resource-card" data-tags="accent conversion research amphion" href="https://github.com/open-mmlab/Amphion"><span>Future research</span><b>Amphion</b><p>Speech generation and representation toolkit useful for later accent-conversion experiments.</p><small>GitHub ↗</small></a>
+
+        <a class="resource-card dataset" data-tags="dataset pronunciation speechocean scoring" href="https://github.com/jimbozhang/speechocean762"><span>Dataset</span><b>SpeechOcean762</b><p>Expert-scored non-native English at phone, word and sentence levels; common pronunciation-assessment benchmark.</p><small>Dataset ↗</small></a>
+        <a class="resource-card dataset" data-tags="dataset l2 arctic mispronunciation learner" href="https://psi.engr.tamu.edu/l2-arctic-corpus/"><span>Dataset</span><b>L2-ARCTIC</b><p>L2 English corpus with phone alignments and manually annotated pronunciation errors.</p><small>Dataset ↗</small></a>
+        <a class="resource-card dataset" data-tags="dataset accent archive native nonnative" href="https://accent.gmu.edu/"><span>Dataset</span><b>Speech Accent Archive</b><p>Controlled same-passage recordings from native and non-native English speakers.</p><small>Dataset ↗</small></a>
+        <a class="resource-card dataset" data-tags="dataset vctk native british uk" href="https://datashare.ed.ac.uk/handle/10283/3443"><span>Dataset</span><b>VCTK</b><p>Native English speech with many speakers; especially useful for British-accent reference work.</p><small>Dataset ↗</small></a>
+        <a class="resource-card dataset" data-tags="dataset common voice accent diversity" href="https://commonvoice.mozilla.org/en/datasets"><span>Dataset</span><b>Common Voice English</b><p>Large-scale accent diversity and speech representation data.</p><small>Dataset ↗</small></a>
+        <a class="resource-card dataset" data-tags="dataset libritts native tts" href="https://www.openslr.org/60/"><span>Dataset</span><b>LibriTTS</b><p>Large native-English corpus useful for reference speech and TTS experiments.</p><small>Dataset ↗</small></a>
+      </div>
+      <p class="license-note">⚖️ <b>Senatus consultum:</b> dataset and model licenses differ. “Open source” does not imply unrestricted commercial redistribution. Verify every license before shipping.</p>
+    </section>
+
+    <section id="roadmap" class="section-shell roadmap">
+      <div class="section-kicker">V · CURSUS HONORUM</div>
+      <h2>Rise through the <span>ranks.</span></h2>
+      <div class="rank-line">
+        <article><i>I</i><div><b>TIRO</b><small>foundation</small><p>Python skeleton · recording · VAD · ASR · known prompt · forced alignment · IPA/ARPABET timeline.</p></div></article>
+        <article><i>II</i><div><b>MILES</b><small>measurement</small><p>Kaldi GOP/GOPT · phone substitutions · formants · F0 · intensity · durations · first report.</p></div></article>
+        <article><i>III</i><div><b>CENTURIO</b><small>target comparison</small><p>Native references · normalized vowel spaces · stress/reduction · rhythm · recurring error profile.</p></div></article>
+        <article><i>IV</i><div><b>TRIBUNUS</b><small>adaptive coaching</small><p>Minimal pairs · shadowing · speed ladders · collocation subsystem · longitudinal analytics.</p></div></article>
+        <article><i>V</i><div><b>IMPERATOR</b><small>research frontier</small><p>Personal calibration · justified fine-tuning · audio-language models · accent conversion · human validation study.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section-shell evaluation">
+      <div class="section-kicker">VI · CENSOR'S OFFICE</div>
+      <h2>How do we know it <span>works?</span></h2>
+      <div class="eval-layout">
+        <p>The project should not declare itself accurate because its own score looks plausible. Evaluate against trained human raters and, eventually, against actual learning outcomes.</p>
+        <ul>
+          <li>phone-level error detection</li><li>error-category agreement</li><li>word stress and prosody</li><li>overall intelligibility</li><li>similarity to the selected target accent</li><li>usefulness of generated feedback</li><li>longitudinal improvement after practice</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="history" class="section-shell history">
+      <div class="history-panel">
+        <div class="section-kicker">VII · WHY “GEMELLUS”?</div>
+        <h2>A Pannonian veteran with a very good <span>project name.</span></h2>
+        <p>Gemellus was a Pannonian auxiliary cavalryman whose surviving military diploma records Roman citizenship after a long military career in AD 122. The project borrows his journey as a playful metaphor for linguistic integration: acquiring command of another system without pretending your earlier identity never existed.</p>
+        <p class="smallprint">Historical metaphor only. We are training vowels, not invading Gaul. The maintainers have been advised accordingly.</p>
+      </div>
+      <blockquote><span>NON ACCENTUM DELEAMUS;<br>IMPERIUM IN EUM CAPIAMUS.</span><small>Let us not erase the accent; let us gain command over it. · playful project Latin, not an ancient quotation</small></blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-eagle">SPQR*</div>
+    <p><b>Gemellus</b> · open-source accent research project</p>
+    <small>*Senatus Populusque Rephoneticus. Absolutely not historically attested.</small>
+    <a href="https://github.com/AliNikkhah2001/Gemellus">Repository ↗</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
