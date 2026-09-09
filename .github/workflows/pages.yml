@@ -1,4 +1,4 @@
-name: Deploy Gemellus to GitHub Pages
+name: Validate Gemellus Pages
 
 on:
   push:
@@ -10,33 +10,20 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Upload static site
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./docs
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Verify static site
+        shell: bash
+        run: |
+          test -f docs/index.html
+          test -f docs/styles.css
+          test -f docs/script.js
+          grep -q '<title>Gemellus' docs/index.html
+          echo "Gemellus static site is ready in /docs."
+          echo "Publish it once via Repository Settings > Pages > Deploy from a branch > main > /docs."
